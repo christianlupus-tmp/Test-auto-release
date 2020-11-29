@@ -8,14 +8,14 @@ release=$(cat .github/actions/version-bumping/release)
 
 message=$(git log HEAD~1...HEAD --format='%s%n%b')
 
-if echo "$messages" | grep '%MAJOR%' > /dev/null ; then
+if echo "$message" | grep '%MAJOR%' > /dev/null ; then
 	
 	echo 'Creating major version'
 	let major=$major+1
 	minor=0
 	release=0
 	
-elif echo "$messages" | grep '%MINOR%' > /dev/null; then
+elif echo "$message" | grep '%MINOR%' > /dev/null; then
 	
 	echo 'Creating minor version'
 	let minor=minor+1
@@ -39,7 +39,7 @@ version="$major.$minor.$release"
 echo "New version is $version."
 
 git config user.name 'Github actions bot'
-git config user.mail 'bot@noreply.github.com'
+git config user.email 'bot@noreply.github.com'
 
 git commit -m "Bump to version $version"
 git tag "v$version"
