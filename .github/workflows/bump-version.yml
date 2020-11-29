@@ -18,3 +18,18 @@ jobs:
                     fetch-depth: 2
                     ref: stable
             -   run: .github/actions/version-bumping/bumpversion.sh
+                id: bumping
+            -   uses: actions/create-release
+                id: create_release
+                with:
+                    tag_name: "v{{ steps.bumping.outputs.version }}"
+                    release_name: "Version {{ steps.bumping.outputs.version }}"
+                    draft: false
+            -   uses: actions/upload-release-asset
+                id: upload_asset
+                with:
+                    upload_url: {{ steps.create_release.outputs.upload_url }}
+                    asset_path: ./archive.tar.gz
+                    asset_name: Archive
+                    asset_content_type: application/gzip
+            -   run: echo "Download URL: {{ steps.upload_asset.outputs.browser_download_url }}"
