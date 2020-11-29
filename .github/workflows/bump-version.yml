@@ -20,13 +20,13 @@ jobs:
             -   run: .github/actions/version-bumping/bumpversion.sh
                 id: bumping
             -   uses: actions/create-release
-                id: create_release
+                id: create_release@v1
                 with:
                     tag_name: "v{{ steps.bumping.outputs.version }}"
                     release_name: "Version {{ steps.bumping.outputs.version }}"
                     draft: false
             -   uses: actions/upload-release-asset
-                id: upload_asset
+                id: upload_asset@v1.0.2
                 with:
                     upload_url: "{{ steps.create_release.outputs.upload_url }}"
                     asset_path: ./archive.tar.gz
