@@ -24,16 +24,16 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 with:
-                    tag_name: "v{{ steps.bumping.outputs.version }}"
-                    release_name: "Version {{ steps.bumping.outputs.version }}"
+                    tag_name: "v${{ steps.bumping.outputs.version }}"
+                    release_name: "Version ${{ steps.bumping.outputs.version }}"
                     draft: false
             -   uses: actions/upload-release-asset@v1.0.2
                 id: upload_asset
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 with:
-                    upload_url: "{{ steps.create_release.outputs.upload_url }}"
+                    upload_url: "${{ steps.create_release.outputs.upload_url }}"
                     asset_path: ./archive.tar.gz
                     asset_name: Archive
                     asset_content_type: application/gzip
-            #-   run: echo "Download URL: {{ steps.upload_asset.outputs.browser_download_url }}"
+            -   run: echo "Download URL: ${{ steps.upload_asset.outputs.browser_download_url }}"
