@@ -28,7 +28,7 @@ jobs:
             -   uses: actions/upload-release-asset
                 id: upload_asset
                 with:
-                    upload_url: {{ steps.create_release.outputs.upload_url }}
+                    upload_url: "{{ steps.create_release.outputs.upload_url }}"
                     asset_path: ./archive.tar.gz
                     asset_name: Archive
                     asset_content_type: application/gzip
