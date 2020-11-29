@@ -46,3 +46,8 @@ git tag "v$version"
 
 git push origin stable
 git push origin "v$version"
+
+echo "::set-output name=version::$version"
+
+tar czf /tmp/archive.tar.gz .
+mv /tmp/archive.tar.gz .
