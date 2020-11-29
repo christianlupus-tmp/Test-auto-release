@@ -14,6 +14,7 @@ jobs:
                 shell: bash
         steps:
             -   uses: actions/checkout@v2
-                fetch-depth: 2
-                branch: stable
+                with:
+                    fetch-depth: 2
+                    ref: stable
             -   run: .github/actions/version-bumping/bumpversion.sh
